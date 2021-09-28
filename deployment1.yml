@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-redis-app
+  labels:
+    app: flask-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-front
+  template:
+    metadata:
+      labels:
+        app: flask-front
+    spec:
+      containers:
+      - name: flask-front-end
+        image: iampawar/flask:latest
+        ports:
+        - containerPort: 5000
+      - name: flask-back-end
+        image: docker.io/library/redis:latest
